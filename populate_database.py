@@ -11,9 +11,16 @@ from cloudant.client import Cloudant
 from cloudant.error import CloudantException
 from cloudant.result import Result, ResultByKey
 
+def countJson(files):
+    count = 0
+    
+    for file in files:
+        count += 1
+    return count
+    
 def main(argv):
     if len(argv) == 2:
-        dire = argv[1]
+        directory = argv[1]
         k = 0
         serviceUsername = input("username: ")
         servicePassword = input("password: ")
@@ -31,17 +38,20 @@ def main(argv):
                 print("Creating " + databaseName + " data base!")
                 db = client.create_database(databaseName)
                 if db.exists():
-                    print("'{0}' data base successfully created.\n".format(databaseName))
+                    print("%s data base successfully created.\n" % databaseName)
             else:
                 db = client[databaseName]
-                    
-            for file in os.listdir(dire):
+                print("Acessing" + databaseName + " data base!")
+            
+            files = os.listdir(directory)
+            n = countJson(files)
+            for file in files:
                 if file.endswith('.json'):
                     k += 1
                     jsonFile = pd.read_json(file,typ="series")
                     doc = db.create_document(jsonFile)
                     if doc.exists():
-                        print("Document '{0}' successfully created.".format(k))
+                        print("Document %s of %s Documents, successfully created." % (k,n))
         except:
             print("Something went wrong!")
         finally:
