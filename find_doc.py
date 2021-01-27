@@ -14,9 +14,9 @@ from cloudant.query import Query
 def main(argv):
     if len(argv) > 0:  
         doc_list = []
-        serviceUsername = 'apikey-v2-1vlegs2hszhw28edvubvpavazd30agbap53azn23gvu2' #input("username: ")
-        servicePassword = '5069a21233042b2dee1b57c2d8c95b0c' #input("password: ")
-        serviceHost = 'b15eba8c-e411-4eda-bd1f-8e804930406f-bluemix.cloudantnosqldb.appdomain.cloud' #input("host: ")
+        serviceUsername = input("username: ")
+        servicePassword = input("password: ")
+        serviceHost = input("host: ")
         databaseName = input("data base name: ")
         serviceURL = 'https://' + serviceUsername + ':' + servicePassword + '@' + serviceHost
         
