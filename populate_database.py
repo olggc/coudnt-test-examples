@@ -32,13 +32,13 @@ def main(argv):
             client = Cloudant(serviceUsername, servicePassword, url=serviceURL)
             client.connect()
             print("Connected!")
-
             
             if databaseName not in client.all_dbs():
                 print("Creating " + databaseName + " data base!")
                 db = client.create_database(databaseName)
                 if db.exists():
                     print("%s data base successfully created.\n" % databaseName)
+                    db = client[databaseName]
             else:
                 db = client[databaseName]
                 print("Acessing" + databaseName + " data base!")
